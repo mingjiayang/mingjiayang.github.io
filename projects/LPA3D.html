@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" slick-uniqueid="3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="Ming-Jia Yang, Beihang University, 杨明佳, 北京航空航天大学, 3D Scene Generation">
+<meta name="description" content="LPA3D: 3D Room-Level Scene Generation from In-the-Wild Images">
+<link rel="stylesheet" href="../homepage_files/style/jemdoc.css" type="text/css">
+<style type="text/css">
+</style>
+<title>LPA3D</title>
+</head>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="./MVD_square_files/js/fontawesome.all.min.js"></script>
+<script src="./MVD_square_files/js/bulma-carousel.min.js"></script>
+<script src="./MVD_square_files/js/bulma-slider.min.js"></script>
+<script src="./MVD_square_files/js/index.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+
+<body>
+<div id="layout-content" style="margin-top:25px">
+
+<!-- teaser -->
+<table border="0" width="100%"> <tbody>
+<tr>
+  <td valign="top" align="center">
+    <b><font size="5" face="Times New Roman" >LPA3D: 3D Room-Level Scene Generation from In-the-Wild Images</font></b>
+    <br><br>
+  </td>
+</tr>
+
+<tr>
+  <td valign="top" align="center">
+    <font size="4" face="Times New Roman" > <a href="https://mingjiayang.github.io/"  target="_blank">Ming-Jia Yang</a> </font> <font size="2"><sup>1</sup></font> &emsp;&emsp;
+    <font size="4" face="Times New Roman" > <a href="https://yuxiaoguo.github.io/"  target="_blank">Yu-Xiao Guo</a> </font> <font size="2"><sup>2</sup></font> &emsp;&emsp;
+    <font size="4" face="Times New Roman" > <a href="https://xueyuhanlang.github.io/"  target="_blank">Yang Liu</a> </font> <font size="2"><sup>2</sup></font> &emsp;&emsp;
+    <font size="4" face="Times New Roman" > <a href="https://scse.buaa.edu.cn/info/1079/7270.htm"  target="_blank">Bin Zhou</a> </font> <font size="2"><sup>1</sup></font> &emsp;&emsp;
+    <font size="4" face="Times New Roman" > <a href="https://scholar.google.com/citations?user=P91a-UQAAAAJ"  target="_blank">Xin Tong</a> </font> <font size="2"><sup>2</sup></font> &emsp;&emsp;
+    <br> 
+    <font size="2"> <sup>1</sup></font> <font size="3" face="Times New Roman" > Beihang University </font>
+    &emsp;&emsp;
+    <font size="2"> <sup>2</sup></font> <font size="3" face="Times New Roman" > Microsoft Research Asia </font>
+    &emsp;&emsp;
+    <br>
+    <font size="3" face="Times New Roman" > Computational Visual Media Journal 2025 </font>
+    <br>
+    <br>
+  </td>
+</tr>
+
+<tr>
+  <td valign="top" align="center">
+      <img width="100%" src="./LPA3D/workflow.png">
+  </td>
+</tr>
+</tbody> </table>
+
+
+<!-- Abstract -->
+<table border="0" width="100%"> <tbody>
+<h2>Abstract</h2>
+<tr>
+  <p style="text-align:justify;">
+  <font face="Times New Roman" >
+    Generating realistic, room-level indoor scenes with semantically plausible and detailed appearance from in-the-wild images is important for various applications in VR, AR, and robotics. The success of NeRF-based generative methods indicates a promising direction to address this challenge. However, unlike their object level counterparts, existing scene-level generative methods require additional information, such as multiple views, depth images, or semantic guidance, rather than relying solely on RGB images. This is because NeRF-based methods necessitate prior knowledge of camera poses, which is challenging to approximate for indoor scenes due to the complexity of defining alignment and the difficulty of globally estimating poses from a single image, given the unseen parts behind the camera. To address this challenge, we redefine global poses within the framework of local-pose-alignment (LPA)---an anchor-based multi-local-coordinate system that uses a selected number of anchors as the roots of these coordinates. Building on this foundation, we introduce LPA-GAN, a novel NeRF-based generative approach that incorporates specific modifications to estimate priors of camera poses under LPA. It also co-optimizes the pose predictor and scene generation processes. Our ablation study and comparisons with straightforward extensions of NeRF-based object generation methods demonstrate the effectiveness of our approach. Furthermore, visual comparisons with other techniques reveal that our method achieves superior inter-view consistency and semantic normality.
+  </font>
+  </p>
+</tr>
+
+<!-- <table border="0" width="100%"> <tbody>
+  <h2>Method</h2>
+
+    <h3>Cross-scene-invariant anchors based LP</h3>
+    <tr>
+      
+      <p style="text-align:justify;">
+      <font face="Times New Roman" >
+        Reformulation of the alignment and estimation of global camera poses for 3D indoor scene generation from a collection of in-the-wild images into a new definition: an anchor-based multi-local-coordinate system named LPA. This novel approach allows NeRF-based GAN methods to transition seamlessly from object-level to scene-level generation.
+      </font>
+      </p>
+      <td align="center"> <img width="90%" src="./LPA3D/overview.png"></td>
+    </tr>
+
+    <h3>LPA-GAN framewor</h3>
+    <tr>
+      
+      <p style="text-align:justify;">
+      <font face="Times New Roman" >
+        Overview of LPA-GAN. We adopt a co-optimization strategy to iteratively train the generative model and camera predictor. During the training iterations of the generative model, highlighted by green lines, only the generator G and discriminator D are trainable. The camera predictor C, which remains frozen during this phase, estimates camera poses from real images, providing these poses as candidates for subsequent sampling processes. The generative sampler for rendering GSR then selects a camera pose within the specified synthetic scene to render a synthetic view. In contrast, during the training iterations of the camera predictor, depicted by orange lines, the predictive sampler for rendering PSR$ uniformly samples views within synthetic scenes generated by the now-frozen generator. PSR supplies rendered images and their corresponding camera poses as training samples for training the camera predictor.
+      </font>
+      </p>
+      <td align="center"> <img width="90%" src="./LPA3D/overview.png"></td>
+    </tr> -->
+
+
+
+<!-- Results -->
+<table border="0" width="100%"> <tbody>
+  <h2>Results</h2>
+  <tr>
+    <center>
+      <video width="80%" height="80%" controls>
+        <source src="./LPA3D/results-video.mp4" type="video/mp4">
+      </video>
+    </center>
+  </tr>
+<tr>
+
+
+
+  <!-- <table border="0" width="100%"> <tbody>
+    <h2>Links</h2>
+  <td align="center" width="25%">
+    <img src="./LPA3D/representative.png" width="200">
+  </td>
+  <td>
+    <strong>Paper</strong> [<a href="https://mingjiayang.github.io/projects/LPA3D.html" target="_blank">PDF</a>] <br><br>
+    </p>
+  </td>
+</tr>
+</tbody> </table> -->
+
+
+</div>
+</body>
+</html>
